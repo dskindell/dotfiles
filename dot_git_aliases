@@ -1,0 +1,43 @@
+[alias]
+	co = checkout
+	cos = !git checkout && git submodule update --recursive
+	sb = show-branch
+	ec = config --global -e
+	subup = submodule update --init --recursive
+	up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+	cob = checkout -b
+	cm = !git add -A && git commit -m
+	lf = log --pretty=fuller --decorate
+	lff = log --pretty=fuller --decorate --patch
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat --date=short
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	lgs = log --graph --oneline --decorate --color
+	lgsl = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lgsla = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+	lts = log --oneline --decorate --tags --no-walk
+	dl = "!git ll -1"
+	dlc = diff --cached HEAD^
+	dfc = diff --cached
+	la = "!git config -l | grep alias | cut -c 7-"
+	last = log -1 --stat
+	cp = cherry-pick
+	cl = clone
+	ci = commit --verbose
+	st = status -sb
+	br = branch
+	unstage = reset HEAD --
+	dc = diff --cached
+	refresh = commit --amend --no-edit
+	reword = commit --verbose --amend
+	pop = !git reset --hard HEAD~$1
+	cm-ref1 = !git add -A && git commit -C HEAD@{1}
+	last-tag = describe --abbrev=0
+	prune-tags = !git tag -l | xargs git tag -d && git fetch -t
+	merge-log = !git log $1^..$1
+	fixup = !git add . && git commit -m \"fixup: something\"
+# The following require helper scripts
+	fbs = !git fetch --all && git branch-status
+	fup = !git fetch --prune $@ && git ffwd-update
+

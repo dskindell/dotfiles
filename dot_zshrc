@@ -1,0 +1,262 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/dsskinde/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# ZSH_THEME="robbyrussell"
+#ZSH_THEME="agnoster"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
+#[ -f /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme ] && source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+POWERLEVEL9K_MODE="awesome-patched"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(brew sudo gitfast git-extras web-search perms history-substring-search aws)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# alias python=python3
+
+alias bb=brazil-build
+alias b='brazil'
+alias bba='brazil-build apollo-pkg'
+alias bbc="brazil-build clean"
+alias bbt='brazil-build test'
+alias bcb="brazil-build clean && brazil-build"
+alias bre='brazil-runtime-exec'
+alias bws='brazil ws'
+alias bwsuse='bws use --gitMode -p'
+alias bwscreate='bws create -n'
+alias brc=brazil-recursive-cmd
+alias bbr='brc brazil-build'
+alias bbp="brazil-recursive-cmd --package \$(basename \$(pwd))-1.0 brazil-build"
+alias bbcp="brazil ws clean && brazil-recursive-cmd --package \$(basename \$(pwd))-1.0 brazil-build"
+alias bball='brc --allPackages'
+alias bbb='brc --allPackages brazil-build'
+alias bbbcp="brazil ws clean && brc --allPackages brazil-build"
+alias bbra='bbr apollo-pkg'
+alias bwc="brazil ws clean ; brazil ws sync --md"
+
+alias bctwip="brazil-build cucumber-tests -Dcucumber.tags=\"@wip\""
+
+alias sam="source ~/samdev.env; brazil-build-tool-exec sam"
+
+if [ "$TERM" = "xterm-kitty" ]; then
+  alias ssh='kitty +kitten ssh'
+fi
+alias kmwinit="kinit -f && mwinit -o -s"
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+if [ -f $HOME/.bash_aliases ]; then
+  source $HOME/.bash_aliases
+fi
+
+if [ -d "$HOME/bin" ]; then
+  PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+  PATH="$HOME/.local/bin:$PATH"
+fi
+
+if [ -d "$HOME/.toolbox/bin" ]; then
+  PATH="$HOME/.toolbox/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/aws/bin" ]; then
+  PATH="$HOME/.local/aws/bin:$PATH"
+  [ -f $HOME/.local/aws/bin/aws_zsh_completer.sh ] && source $HOME/.local/aws/bin/aws_zsh_completer.sh
+elif [ -d "/usr/local/aws/bin" ]; then
+  PATH="/usr/local/aws/bin:$PATH"
+  [ -f /usr/local/aws/bin/aws_zsh_completer.sh ] && source /usr/local/aws/bin/aws_zsh_completer.sh
+fi
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+if [ -d "/usr/local/sbin" ]; then
+  PATH="/usr/local/sbin:$PATH"
+fi
+
+if [ -d "$HOME/go/bin" ]; then
+  PATH="$PATH:$HOME/go/bin"
+fi
+
+#if [ -d "$HOME/Library/Python/3.7/bin" ]; then
+#  PATH="$PATH:$HOME/Library/Python/3.7/bin"
+#fi
+
+#if [ -d "$HOME/Library/Python/3.9/bin" ]; then
+#  PATH="$PATH:$HOME/Library/Python/3.9/bin"
+#fi
+
+if [ -d "/usr/local/opt/python@3.10/bin" ]; then
+  PATH="/usr/local/opt/python@3.10/bin:$PATH"
+fi
+
+if [ -d "/usr/local/opt/node@12/bin" ]; then
+  PATH="$PATH:/usr/local/opt/node@12/bin"
+fi
+
+export PATH
+
+DEFAULT_USER=`whoami`
+
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+# If you're using envImprovement, please make sure this is added after the
+# "source /apollo/env/envImprovement/var/zshrc" line in your ~/.zshr
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt appendhistory autocd
+unsetopt beep extendedglob nomatch notify
+bindkey -e
+# End of lines configured by zsh-newuser-install
+
+prompt_context(){}
+
+
+export NVM_DIR="/Users/dsskinde/.nvm"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export PATH=/opt/homebrew/bin:$PATH
+
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
+#klist -s
+#if [[ $? != 0 || $((`date +%s -d "$(klist | grep 'renew until' | head -1 | cut -d' ' -f 3,4)"` - `date +%s`)) -lt 129600 ]] ; then
+#    kdestroy 2> /dev/null
+#    kinit -f -l 7d -r 30d
+#fi
+
+export JAVA_TOOLS_OPTIONS="-Dlog4j2.formatMsgNoLookups=true"
+
+export PATH=$PATH:/Users/dsskinde/.toolbox/bin
+export PATH=$PATH:/Users/dsskinde/workplace/git-scripts/src/BrazilGitScripts/bin
+
+export GRAPHVIZ_DOT=/opt/homebrew/bin/dot

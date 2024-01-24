@@ -1,0 +1,15 @@
+[user]
+	name = David Skindell
+	email = dsskinde@amazon.com
+[core]
+	editor = vim
+	pager = less -FX
+	excludesfile = /Users/dsskinde/.config/git/excludes
+[color]
+	ui = true
+[include]
+	path = ~/.git_aliases
+[pull]
+	rebase = false
+[diff "pkgconfig"]
+	xfuncname = [-[:alpha:]]+.*=.*\\{
